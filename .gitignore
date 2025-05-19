@@ -18,6 +18,10 @@ node_modules/
 # App data folders
 data/
 pgdata/
+.qodo/
 
 # Local zip backups
-backend.zip
+backup.zip
+
+# SQL
+*sql

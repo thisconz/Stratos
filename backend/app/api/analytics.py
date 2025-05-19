@@ -6,9 +6,13 @@ from ..models.user import User
 from ..models.file_metadata import FileMetadata
 
 async def get_system_stats(db: AsyncSession) -> dict:
-    total_users = await db.scalar(select(func.count(User.id)))
-    total_files = await db.scalar(select(func.count(FileMetadata.id)))
-    deleted_files = await db.scalar(select(func.count(FileMetadata.id)).where(FileMetadata.deleted == True))
+    stmt = select(
+        func.count(User.id),
+        func.count(FileMetadata.id),
+        func.count().filter(FileMetadata.deleted.is_(True))
+    )
+    result = await db.execute(stmt)
+    total_users, total_files, deleted_files = result.one()
 
     return {
         "total_users": total_users or 0,

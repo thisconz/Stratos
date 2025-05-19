@@ -1,16 +1,17 @@
 from fastapi import APIRouter, UploadFile, File, Depends, Body, Query
 from fastapi.responses import StreamingResponse
 from sqlalchemy import func
+from sqlalchemy.orm import Session
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 from tempfile import SpooledTemporaryFile
 from datetime import datetime
-from typing import Optional
+from typing import Optional, List
 from pydantic import BaseModel, EmailStr
 
 from ..auth import get_current_user
 from ...core.db import get_db
-from ..schemas.file import MetadataSearchQuery
+from ..schemas.file import MetadataSearchQuery, FileOut
 from ...core.s3 import s3, BUCKET_NAME, get_presigned_url
 from ...models.user import User
 from ...models.file_metadata import FileMetadata

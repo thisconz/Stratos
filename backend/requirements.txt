@@ -42,6 +42,7 @@ PyYAML==6.0.2
 rich==14.0.0
 rich-toolkit==0.14.6
 rsa==4.9.1
+cryptography
 s3transfer==0.12.0
 shellingham==1.5.4
 six==1.17.0
