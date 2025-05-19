@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+.env
+
+# Node (for future frontend)
+node_modules/
+.next/
+
+# General
+*.log
+*.sqlite3
+
+# IDE config
+.vscode/
+
+# App data folders
+data/
+pgdata/
+
+# Local zip backups
+backend.zip
