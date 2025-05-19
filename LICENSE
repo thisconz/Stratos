@@ -1,21 +1,40 @@
-MIT License
+Ylphore Public Use License (Non-Commercial)
+Version 1.0 — May 2025
 
-Copyright (c) 2025 Ylphore
+Copyright (c) 2025 Ylphore. All rights reserved.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the “Software”), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+This software and associated materials (“Software”) are the proprietary property of Ylphore. By using, installing, or accessing the Software, you agree to the following terms:
 
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
+1. GRANT OF LICENSE
+   Subject to your compliance with this License, Ylphore grants you a worldwide, royalty-free, non-exclusive license to use the Software **solely for personal or non-commercial purposes**.
 
-THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
+2. NON-COMMERCIAL USE ONLY
+   This license strictly prohibits any commercial use, including but not limited to:
+   - Selling, licensing, or monetizing the Software;
+   - Using the Software as part of a commercial service or product;
+   - Incorporating the Software into closed or open-source projects for commercial gain.
+
+3. RESTRICTIONS
+   You may NOT:
+   - Redistribute, sublicense, or relicense the Software;
+   - Modify or create derivative works based on the Software;
+   - Reverse engineer, decompile, or disassemble any part of the Software;
+   - Use the Software in any manner that violates any applicable law or regulation;
+   - Remove or alter any copyright, trademark, or other proprietary notices.
+
+4. OWNERSHIP
+   The Software is licensed, not sold. All rights, title, and interest in and to the Software remain with Ylphore.
+
+5. TERMINATION
+   This License terminates automatically if you violate any term. Upon termination, you must immediately stop all use and delete all copies of the Software.
+
+6. DISCLAIMER OF WARRANTY
+   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND. YLPHORE DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.
+
+7. LIMITATION OF LIABILITY
+   YLPHORE SHALL NOT BE LIABLE FOR ANY DAMAGES OR LOSSES ARISING FROM THE USE OF THE SOFTWARE, INCLUDING BUT NOT LIMITED TO INDIRECT, INCIDENTAL, SPECIAL, OR CONSEQUENTIAL DAMAGES.
+
+8. GOVERNING LAW
+   This License shall be governed and enforced globally under the principles of international copyright and intellectual property law.
+
+For commercial licensing, custom agreements, or inquiries, contact: legal@ylphore.com
