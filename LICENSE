@@ -1,40 +1,54 @@
-Ylphore Public Use License (Non-Commercial)
+Ylphore Public Use License (Non-Commercial, Modifiable)
 Version 1.0 — May 2025
 
 Copyright (c) 2025 Ylphore. All rights reserved.
 
-This software and associated materials (“Software”) are the proprietary property of Ylphore. By using, installing, or accessing the Software, you agree to the following terms:
+This software and associated materials (“Software”) are the proprietary property of Ylphore.
 
-1. GRANT OF LICENSE
-   Subject to your compliance with this License, Ylphore grants you a worldwide, royalty-free, non-exclusive license to use the Software **solely for personal or non-commercial purposes**.
+By using, copying, modifying, or distributing this Software, you agree to the following terms:
 
-2. NON-COMMERCIAL USE ONLY
-   This license strictly prohibits any commercial use, including but not limited to:
-   - Selling, licensing, or monetizing the Software;
-   - Using the Software as part of a commercial service or product;
-   - Incorporating the Software into closed or open-source projects for commercial gain.
+1. Grant of License
 
-3. RESTRICTIONS
-   You may NOT:
-   - Redistribute, sublicense, or relicense the Software;
-   - Modify or create derivative works based on the Software;
-   - Reverse engineer, decompile, or disassemble any part of the Software;
-   - Use the Software in any manner that violates any applicable law or regulation;
-   - Remove or alter any copyright, trademark, or other proprietary notices.
+Ylphore grants you a worldwide, royalty-free, non-exclusive license to use, copy, and modify the Software solely for non-commercial purposes, subject to the conditions in this License.
 
-4. OWNERSHIP
-   The Software is licensed, not sold. All rights, title, and interest in and to the Software remain with Ylphore.
+2. Non-Commercial Use Only
 
-5. TERMINATION
-   This License terminates automatically if you violate any term. Upon termination, you must immediately stop all use and delete all copies of the Software.
+You may not use the Software, original or modified, for any commercial purpose. This includes (but is not limited to):
 
-6. DISCLAIMER OF WARRANTY
-   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND. YLPHORE DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.
+- Selling, licensing, or monetizing the Software
+- Using the Software in any for-profit business context
+- Offering services or products that incorporate the Software for a fee
 
-7. LIMITATION OF LIABILITY
-   YLPHORE SHALL NOT BE LIABLE FOR ANY DAMAGES OR LOSSES ARISING FROM THE USE OF THE SOFTWARE, INCLUDING BUT NOT LIMITED TO INDIRECT, INCIDENTAL, SPECIAL, OR CONSEQUENTIAL DAMAGES.
+3. Modifications
 
-8. GOVERNING LAW
-   This License shall be governed and enforced globally under the principles of international copyright and intellectual property law.
+You may create and use modified versions of the Software under the following conditions:
 
-For commercial licensing, custom agreements, or inquiries, contact: legal@ylphore.com
+- You must credit "Ylphore" as the original author
+- You must retain this license in all modified versions
+- You may not alter or relicense the Software
+- You may not obscure or restrict access to the source code
+
+Stale Fork Clause: If your modified version does not receive updates for 12 consecutive months, your license to that version automatically expires.
+
+4. Redistribution
+
+Redistribution is allowed only for non-commercial purposes and under the same license, with attribution to Ylphore. You may not redistribute modified versions under a different license or claim ownership.
+
+5. No Warranty
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND.  
+YLPHORE DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.
+
+6. Limitation of Liability
+
+IN NO EVENT SHALL YLPHORE BE LIABLE FOR ANY DAMAGES ARISING FROM THE USE, MISUSE, OR FAILURE OF THIS SOFTWARE, INCLUDING BUT NOT LIMITED TO LOST PROFITS, DATA LOSS, OR SERVICE INTERRUPTION.
+
+7. Termination
+
+This license is automatically terminated if any of its terms are violated. Upon termination, all rights to use or distribute the Software are immediately revoked.
+
+8. Governing Law
+
+This license is governed by international copyright and intellectual property law.
+
+End of License
