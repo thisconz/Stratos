@@ -1,21 +1,54 @@
-MIT License
+Ylphore Public Use License (Non-Commercial, Modifiable)
+Version 1.0 — May 2025
 
-Copyright (c) 2025 Ylphore
+Copyright (c) 2025 Ylphore. All rights reserved.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the “Software”), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+This software and associated materials (“Software”) are the proprietary property of Ylphore.
 
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
+By using, copying, modifying, or distributing this Software, you agree to the following terms:
 
-THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
+1. Grant of License
+
+Ylphore grants you a worldwide, royalty-free, non-exclusive license to use, copy, and modify the Software solely for non-commercial purposes, subject to the conditions in this License.
+
+2. Non-Commercial Use Only
+
+You may not use the Software, original or modified, for any commercial purpose. This includes (but is not limited to):
+
+- Selling, licensing, or monetizing the Software
+- Using the Software in any for-profit business context
+- Offering services or products that incorporate the Software for a fee
+
+3. Modifications
+
+You may create and use modified versions of the Software under the following conditions:
+
+- You must credit "Ylphore" as the original author
+- You must retain this license in all modified versions
+- You may not alter or relicense the Software
+- You may not obscure or restrict access to the source code
+
+Stale Fork Clause: If your modified version does not receive updates for 12 consecutive months, your license to that version automatically expires.
+
+4. Redistribution
+
+Redistribution is allowed only for non-commercial purposes and under the same license, with attribution to Ylphore. You may not redistribute modified versions under a different license or claim ownership.
+
+5. No Warranty
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND.  
+YLPHORE DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.
+
+6. Limitation of Liability
+
+IN NO EVENT SHALL YLPHORE BE LIABLE FOR ANY DAMAGES ARISING FROM THE USE, MISUSE, OR FAILURE OF THIS SOFTWARE, INCLUDING BUT NOT LIMITED TO LOST PROFITS, DATA LOSS, OR SERVICE INTERRUPTION.
+
+7. Termination
+
+This license is automatically terminated if any of its terms are violated. Upon termination, all rights to use or distribute the Software are immediately revoked.
+
+8. Governing Law
+
+This license is governed by international copyright and intellectual property law.
+
+End of License
