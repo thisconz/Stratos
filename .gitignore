@@ -1,8 +1,12 @@
+# Backend
+
 # Python
 __pycache__/
 *.pyc
 .venv/
+venv/
 .env
+alembic/
 
 # Node (for future frontend)
 node_modules/
@@ -21,7 +25,10 @@ pgdata/
 .qodo/
 
 # Local zip backups
-backup.zip
+backend_backup.zip
 
 # SQL
 *sql
+
+# Frontend
+frontend/

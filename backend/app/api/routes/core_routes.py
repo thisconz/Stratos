@@ -8,6 +8,7 @@ from tempfile import SpooledTemporaryFile
 from datetime import datetime
 from typing import Optional, List
 from pydantic import BaseModel, EmailStr
+import logging
 
 from ..auth import get_current_user
 from ...core.db import get_db
@@ -98,7 +99,20 @@ async def download_file(object_key: str, db: AsyncSession = Depends(get_db)):
 @router.get("/files")
 async def list_files(db: AsyncSession = Depends(get_db)):
     result = await db.execute(select(FileMetadata).where(FileMetadata.deleted == False))
-    return result.scalars().all()
+    files = result.scalars().all()
+    return [
+        {
+            "id": f.id,
+            "object_key": f.object_key,
+            "bucket": f.bucket,
+            "size": f.size,
+            "uploaded_at": f.uploaded_at.isoformat() if f.uploaded_at else None,
+            "file_metadata": f.file_metadata,
+            "deleted": f.deleted,
+            "user_id": f.user_id,
+        }
+        for f in files
+    ]
 
 @router.get("/versions/{object_key}")
 async def get_versions(object_key: str, db: AsyncSession = Depends(get_db)):

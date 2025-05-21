@@ -6,7 +6,7 @@ from ...models.user import User
 from ..auth import create_access_token, verify_password, get_password_hash
 from ...core.db import get_db
 
-router = APIRouter(prefix="/auth", tags=["auth"])
+router = APIRouter()
 
 class RegisterRequest(BaseModel):
     email: EmailStr
