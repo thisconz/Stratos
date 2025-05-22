@@ -1,7 +1,7 @@
 from dotenv import load_dotenv
-import os
-
 load_dotenv()
+
+import os
 
 class Settings:
     def __init__(self):
@@ -10,6 +10,8 @@ class Settings:
         self.S3_SECRET_KEY = os.getenv("S3_SECRET_KEY")
         self.S3_BUCKET = os.getenv("S3_BUCKET")
         self.DATABASE_URL = os.getenv("DATABASE_URL")
+        self.SECRET_KEY = os.getenv("SECRET_KEY")  # <--- add this
+        self.ALGORITHM = os.getenv("ALGORITHM", "HS256")  # <--- add this, default HS256
 
         missing = [
             var for var, value in [
@@ -18,6 +20,7 @@ class Settings:
                 ("S3_SECRET_KEY", self.S3_SECRET_KEY),
                 ("S3_BUCKET", self.S3_BUCKET),
                 ("DATABASE_URL", self.DATABASE_URL),
+                ("SECRET_KEY", self.SECRET_KEY),  # <--- required now
             ] if value is None
         ]
         if missing:

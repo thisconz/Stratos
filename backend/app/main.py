@@ -1,10 +1,12 @@
 from .api.dependencies import get_current_admin
 from fastapi import FastAPI, Depends
+from fastapi.middleware.cors import CORSMiddleware
+
 from .api.routes.core_routes import router as core_router
 from .api.routes.auth_routes import router as auth_router
 from .api.routes.admin_routes import router as admin_router
 from .api.routes.locations import router as locations
-from fastapi.middleware.cors import CORSMiddleware
+
 
 app = FastAPI(
     docs_url="/docs",

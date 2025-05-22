@@ -8,9 +8,11 @@ from sqlalchemy.future import select
 
 from ..models.user import User
 from ..core.db import get_db
+from app.core.config import settings
 
-SECRET_KEY = "your-secret"
-ALGORITHM = "HS256"
+
+SECRET_KEY = settings.SECRET_KEY
+ALGORITHM = settings.ALGORITHM
 ACCESS_TOKEN_EXPIRE_MINUTES = 60
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")

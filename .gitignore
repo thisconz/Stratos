@@ -8,13 +8,10 @@ venv/
 .env
 alembic/
 
-# Node (for future frontend)
-node_modules/
-.next/
-
 # General
 *.log
 *.sqlite3
+alembic.ini
 
 # IDE config
 .vscode/
@@ -32,3 +29,7 @@ backend_backup.zip
 
 # Frontend
 frontend/
+
+# Node (for future frontend)
+node_modules/
+.next/
