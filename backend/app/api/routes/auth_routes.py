@@ -28,7 +28,8 @@ async def register(data: RegisterRequest, db: AsyncSession = Depends(get_db)):
     exists = await db.execute(select(User).where(User.email == data.email))
     if exists.scalar_one_or_none():
         raise HTTPException(status_code=400, detail="Email already in use")
-    user = User(email=data.email, hashed_password=get_password_hash(data.password))
+    hashed_password = get_password_hash(data.password)
+    user = User(email=data.email, hashed_password=hashed_password)
     db.add(user)
     await db.commit()
     await db.refresh(user)
@@ -38,23 +39,32 @@ class LoginRequest(BaseModel):
     email: EmailStr
     password: str
 
-@router.post("/login")
-async def login(data: LoginRequest, db: AsyncSession = Depends(get_db)):
-    result = await db.execute(select(User).where(User.email == data.email))
+async def authenticate_user(email: str, password: str, db: AsyncSession):
+    result = await db.execute(select(User).where(User.email == email))
     user = result.scalar_one_or_none()
-    if not user or not verify_password(data.password, user.hashed_password):
-        raise HTTPException(status_code=401, detail="Invalid credentials")
+    if not user or not verify_password(password, user.hashed_password):
+        return None
+    return user
+
+@router.post("/login")
+async def login(form_data: OAuth2PasswordRequestForm = Depends(), db: AsyncSession = Depends(get_db)):
+    user = await authenticate_user(form_data.username, form_data.password, db)
+    if not user:
+        raise HTTPException(
+            status_code=401,
+            detail="Incorrect email or password"
+        )
     token = create_access_token({"sub": user.email})
     return {"access_token": token, "token_type": "bearer"}
 
+
 @router.post("/token")
 async def login(form_data: OAuth2PasswordRequestForm = Depends(), db: AsyncSession = Depends(get_db)):
-    result = await db.execute(select(User).where(User.email == form_data.username))
-    user = result.scalar_one_or_none()
-    if not user or not verify_password(form_data.password, user.hashed_password):
+    user = await authenticate_user(form_data.username, form_data.password, db)
+    if not user:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Incorrect username or password",
+            detail="Incorrect email or password",
         )
     token = create_access_token({"sub": user.email})
     return {"access_token": token, "token_type": "bearer"}

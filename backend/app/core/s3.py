@@ -1,12 +1,14 @@
+from sqlalchemy import select
+from sqlalchemy.ext.asyncio import AsyncSession
+import io
 import re
 import botocore.exceptions
 import boto3
 from botocore.config import Config
+
 from .config import settings
-from tempfile import SpooledTemporaryFile
-from sqlalchemy import select
 from ..models.file_metadata import FileMetadata
-from sqlalchemy.ext.asyncio import AsyncSession
+
 
 s3 = boto3.client(
     "s3",
@@ -20,8 +22,13 @@ s3 = boto3.client(
 BUCKET_NAME = settings.S3_BUCKET
 
 def sanitize_filename(filename):
-    # Only allow alphanumeric, dash, underscore, and dot
-    return re.sub(r'[^A-Za-z0-9._-]', '_', filename)
+    # Only allow alphanumeric, dash, underscore, and a single dot (not at start), to prevent directory traversal and hidden files
+    filename = re.sub(r'[^A-Za-z0-9_-]', '_', filename)
+    # Optionally, allow a single dot for file extension, but not at the start
+    if '.' in filename:
+        name, ext = filename.rsplit('.', 1)
+        filename = f"{name}_{ext}" if not name else f"{name}.{ext}"
+    return filename.lstrip('.')
 
 async def upload_to_s3(file, max_size=10 * 1024 * 1024):  # 10 MB limit
     try:
@@ -39,8 +46,7 @@ async def download_from_s3(filename):
     try:
         safe_filename = sanitize_filename(filename)
         obj = s3.get_object(Bucket=BUCKET_NAME, Key=safe_filename)
-        stream = SpooledTemporaryFile()
-        stream.write(obj['Body'].read())
+        stream = io.BytesIO(obj['Body'].read())
         stream.seek(0)
         return stream
     except botocore.exceptions.BotoCoreError as e:

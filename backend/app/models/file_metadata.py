@@ -1,9 +1,10 @@
+from sqlalchemy import Boolean, Column, DateTime, ForeignKey, Integer, String, JSON, func
+from sqlalchemy.types import TypeDecorator, VARCHAR
+from sqlalchemy.orm import relationship
+from sqlalchemy.sql import expression
 import os
 import json
 from datetime import datetime
-from sqlalchemy.types import TypeDecorator, VARCHAR
-from sqlalchemy.orm import relationship
-from sqlalchemy import Boolean, Column, DateTime, ForeignKey, Integer, String, JSON, func
 from cryptography.fernet import Fernet
 
 from ..core.db import Base
@@ -14,6 +15,7 @@ class EncryptedJSON(TypeDecorator):
     Uses Fernet symmetric encryption.
     """
     impl = VARCHAR
+    cache_ok = True
 
     def __init__(self, *args, **kwargs):
         fernet_key = os.environ.get("FERNET_KEY")
@@ -30,7 +32,7 @@ class EncryptedJSON(TypeDecorator):
                 return encrypted
             except Exception as e:
                 raise ValueError(f"Failed to encrypt JSON: {e}")
-        return value
+        return None
 
     def process_result_value(self, value, dialect):
         if value is not None:
@@ -53,7 +55,7 @@ class FileMetadata(Base):
     size = Column(Integer, nullable=False)
     uploaded_at = Column(DateTime, server_default=func.now(), nullable=False)
     file_metadata = Column(EncryptedJSON, nullable=True)
-    deleted = Column(Boolean, server_default="false", nullable=False)
+    deleted = Column(Boolean, server_default=expression.false(), nullable=False)
 
     user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
     owner = relationship("User", back_populates="files")

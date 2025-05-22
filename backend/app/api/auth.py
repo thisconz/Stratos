@@ -13,7 +13,7 @@ from app.core.config import settings
 
 SECRET_KEY = settings.SECRET_KEY
 ALGORITHM = settings.ALGORITHM
-ACCESS_TOKEN_EXPIRE_MINUTES = 60
+ACCESS_TOKEN_EXPIRE_MINUTES = settings.ACCESS_TOKEN_EXPIRE_MINUTES
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login")
@@ -26,7 +26,11 @@ def get_password_hash(password: str) -> str:
 
 def create_access_token(data: dict, expires_delta: timedelta = None) -> str:
     to_encode = data.copy()
-    expire = datetime.utcnow() + (expires_delta or timedelta(minutes=15))
+    if "sub" not in to_encode:
+        raise ValueError("Token payload must include 'sub' claim for user identification.")
+    expire = datetime.utcnow() + (
+        expires_delta or timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    )
     to_encode.update({"exp": expire})
     return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
 
@@ -44,7 +48,7 @@ async def get_current_user(
     except (JWTError, ValueError):
         raise credentials_exception
     result = await db.execute(select(User).where(User.id == user_id))
-    user = result.scalar_one_or_none()
+    user = result.scalars().first()
     if not user:
         raise credentials_exception
     return user

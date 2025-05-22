@@ -12,6 +12,7 @@ class Settings:
         self.DATABASE_URL = os.getenv("DATABASE_URL")
         self.SECRET_KEY = os.getenv("SECRET_KEY")  # <--- add this
         self.ALGORITHM = os.getenv("ALGORITHM", "HS256")  # <--- add this, default HS256
+        self.ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", 30))
 
         missing = [
             var for var, value in [
