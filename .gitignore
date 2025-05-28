@@ -3,7 +3,6 @@
 # Python
 __pycache__/
 *.pyc
-.venv/
 venv/
 .env
 alembic/
@@ -23,6 +22,9 @@ pgdata/
 
 # Local zip backups
 backend_backup.zip
+
+# Docker
+*.yml
 
 # SQL
 *sql

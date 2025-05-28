@@ -1,8 +1,9 @@
 import logging
-from app.core.db import engine
-from .models.user import Base
-from .models.file_metadata import Base
 import asyncio
+
+from app.core.db import engine
+from app.models.user import Base
+from app.models.file_metadata import Base
 
 async def init():
     try:

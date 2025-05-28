@@ -1,37 +1,40 @@
-from .api.dependencies import get_current_admin
-from fastapi import FastAPI, Depends
-from fastapi.middleware.cors import CORSMiddleware
-
-from .api.routes.core_routes import router as core_router
-from .api.routes.auth_routes import router as auth_router
-from .api.routes.admin_routes import router as admin_router
-from .api.routes.locations import router as locations
-
-
-app = FastAPI(
-    docs_url="/docs",
-    redoc_url="/redoc",
-    openapi_url="/openapi.json"
+from fastapi import FastAPI
+from app.api.v1 import (
+    auth, files, metadata, user, onboarding, sessions,
+    mfa, analytics, product_tour, oauth
 )
+from fastapi.middleware.cors import CORSMiddleware
+from starlette.middleware.sessions import SessionMiddleware
+import os
 
-origins = [
-    "http://localhost:3000",
-    # Add other frontend URLs if needed
-]
+app = FastAPI(title="Stratos API", version="1.0")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=["http://localhost:3000"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
+app.add_middleware(
+    SessionMiddleware,
+    secret_key=os.getenv("SESSION_SECRET_KEY", "supersecretkey123"),
+)
+
+# Root health check
 @app.get("/")
 async def root():
-    return {"message": "API is running"}
+    return {"message": "Stratos API is running"}
 
-app.include_router(auth_router, prefix="/auth", tags=["auth"])
-app.include_router(core_router, tags=["core"])
-app.include_router(admin_router, prefix="/admin", tags=["admin"], dependencies=[Depends(get_current_admin)])
-app.include_router(locations, prefix="/locations", tags=["locations"])
+# Register routes
+app.include_router(auth.router, prefix="/auth", tags=["auth"])
+app.include_router(files.router, prefix="/files", tags=["files"])
+app.include_router(metadata.router, prefix="/metadata", tags=["metadata"])
+app.include_router(user.router, prefix="/users", tags=["users"])
+app.include_router(onboarding.router, prefix="/onboarding", tags=["onboarding"])
+app.include_router(sessions.router, prefix="/sessions", tags=["sessions"])
+app.include_router(mfa.router, prefix="/mfa", tags=["mfa"])
+app.include_router(analytics.router, prefix="/analytics", tags=["analytics"])
+app.include_router(product_tour.router, prefix="/tour", tags=["product tour"])
+app.include_router(oauth.router, prefix="/oauth", tags=["oauth"])
