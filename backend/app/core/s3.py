@@ -1,77 +1,33 @@
-from sqlalchemy import select
-from sqlalchemy.ext.asyncio import AsyncSession
-import io
-import re
-import botocore.exceptions
-import boto3
-from botocore.config import Config
+from minio import Minio
+import asyncio
+from concurrent.futures import ThreadPoolExecutor
 
-from .config import settings
-from ..models.file_metadata import FileMetadata
+from app.core.config import settings
 
+executor = ThreadPoolExecutor()
 
-s3 = boto3.client(
-    "s3",
-    endpoint_url=settings.S3_ENDPOINT,
-    aws_access_key_id=settings.S3_ACCESS_KEY,
-    aws_secret_access_key=settings.S3_SECRET_KEY,
-    config=Config(signature_version='s3v4'),
-    region_name="us-east-1",
+client = Minio(
+    settings.S3_ENDPOINT,
+    access_key=settings.S3_ACCESS_KEY,
+    secret_key=settings.S3_SECRET_KEY,
+    secure=False
 )
 
-BUCKET_NAME = settings.S3_BUCKET
+async def init_bucket():
+    def _check_create():
+        if not client.bucket_exists(settings.S3_BUCKET):
+            client.make_bucket(settings.S3_BUCKET)
 
-def sanitize_filename(filename):
-    # Only allow alphanumeric, dash, underscore, and a single dot (not at start), to prevent directory traversal and hidden files
-    filename = re.sub(r'[^A-Za-z0-9_-]', '_', filename)
-    # Optionally, allow a single dot for file extension, but not at the start
-    if '.' in filename:
-        name, ext = filename.rsplit('.', 1)
-        filename = f"{name}_{ext}" if not name else f"{name}.{ext}"
-    return filename.lstrip('.')
+    await asyncio.get_event_loop().run_in_executor(executor, _check_create)
 
-async def upload_to_s3(file, max_size=10 * 1024 * 1024):  # 10 MB limit
-    try:
-        content = await file.read()
-        if len(content) > max_size:
-            raise ValueError("File too large")
-        safe_filename = sanitize_filename(file.filename)
-        s3.put_object(Bucket=BUCKET_NAME, Key=safe_filename, Body=content)
-        return safe_filename
-    except botocore.exceptions.BotoCoreError as e:
-        # Log error and return a safe error message
-        raise RuntimeError("Failed to upload file to S3") from e
+async def generate_presigned_upload_url(object_name: str, expires: int = 3600):
+    return await asyncio.get_event_loop().run_in_executor(
+        executor,
+        lambda: client.presigned_put_object(settings.S3_BUCKET, object_name, expires)
+    )
 
-async def download_from_s3(filename):
-    try:
-        safe_filename = sanitize_filename(filename)
-        obj = s3.get_object(Bucket=BUCKET_NAME, Key=safe_filename)
-        stream = io.BytesIO(obj['Body'].read())
-        stream.seek(0)
-        return stream
-    except botocore.exceptions.BotoCoreError as e:
-        raise RuntimeError("Failed to download file from S3") from e
-
-async def get_next_version(object_key: str, db: AsyncSession):
-    try:
-        result = await db.execute(
-            select(FileMetadata)
-            .where(FileMetadata.object_key == object_key)
-            .order_by(FileMetadata.version_number.desc())
-        )
-        last_entry = result.scalars().first()
-        return (last_entry.version_number + 1) if last_entry else 1
-    except Exception as e:
-        raise RuntimeError("Failed to get next version from database") from e
-
-def get_presigned_url(key: str, expires_in: int = 600):
-    try:
-        safe_key = sanitize_filename(key)
-        return s3.generate_presigned_url(
-            ClientMethod="get_object",
-            Params={"Bucket": BUCKET_NAME, "Key": safe_key},
-            ExpiresIn=expires_in
-        )
-    except botocore.exceptions.BotoCoreError as e:
-        raise RuntimeError("Failed to generate presigned URL") from e
-
+async def generate_presigned_download_url(object_name: str, expires: int = 3600):
+    return await asyncio.get_event_loop().run_in_executor(
+        executor,
+        lambda: client.presigned_get_object(settings.S3_BUCKET, object_name, expires)
+    )

@@ -1,16 +1,17 @@
-import logging
+import sys
+import os
 import asyncio
 
-from app.core.db import engine
-from app.models.user import Base
-from app.models.file_metadata import Base
+sys.path.append(os.path.join(os.path.dirname(__file__), "app"))
+
+from app.core.db import Base, engine
+from app.models import user, object, document  # Ensure all models are loaded
 
 async def init():
-    try:
-        async with engine.begin() as conn:
-            await conn.run_sync(Base.metadata.create_all)
-    except Exception as e:
-        logging.error(f"Database initialization failed: {e}")
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
+        print("✅ Tables created.")
 
 if __name__ == "__main__":
     asyncio.run(init())
+    
